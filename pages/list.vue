@@ -1,7 +1,7 @@
 <template>
   <div style="padding: 0px;margin-top: 0px;">
     <div class="g-nav">
-      <div><img src="/l.png" style="height: 30px;" /></div>
+      <div><img src="/gohoubi/l.png" style="height: 30px;" /></div>
       <div class="prev">
         <nuxt-link :to="{ path: '/' }">戻る</nuxt-link>
       </div>
@@ -10,7 +10,7 @@
     <div style="padding: 15px;">
       <ul class="items" style="padding-bottom: 140px;">
         <li v-for="(item, i) in 60" :key="item" :class="{ active: point > i }">
-          <img src="/seal.png" class="seal" />
+          <img src="/gohoubi/seal.png" class="seal" />
           <span v-if="i == 60 - 1">★★★</span>
           <span v-else-if="i % 10 == 0 && i > 0">★</span>
           <span v-else>{{ i + 1 }}</span>
@@ -18,7 +18,7 @@
       </ul>
     </div>
     <div class="action-button">
-      <div><img src="/button.png" @click="workModal.isActive = true" /></div>
+      <div><img src="/gohoubi/button.png" @click="workModal.isActive = true" /></div>
     </div>
     <WorkModal v-if="workModal.isActive" @addPoint="addPoint" @closeWork="closeWork" />
     <RewardModal v-if="rewardModal.isActive" @finishAndClose="finishAndClose" />

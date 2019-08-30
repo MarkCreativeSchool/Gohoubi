@@ -15,6 +15,9 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
+  router: {
+    base: "/gohoubi/",
+  },
   loading: { color: "#fff" },
   css: [],
 
