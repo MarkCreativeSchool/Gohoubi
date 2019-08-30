@@ -3,15 +3,12 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">お手伝い登録</p>
-        <button class="delete" aria-label="close"></button>
+        <p class="modal-card-title">ご褒美ルーレット</p>
+        <button class="delete" aria-label="close" @click="finishAndClose"></button>
       </header>
       <section class="modal-card-body">
-        <Roulette />
+        <Roulette @finishAndClose="finishAndClose" />
       </section>
-      <footer class="modal-card-foot">
-        <button class="button is-success" :disabled="!work.length > 0">登録</button>
-      </footer>
     </div>
   </div>
 </template>
@@ -44,6 +41,9 @@ export default {
     },
     close() {
       this.$emit("closeWorkSettingModal")
+    },
+    finishAndClose() {
+      this.$emit("finishAndClose")
     },
   },
 }

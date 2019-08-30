@@ -5,7 +5,7 @@
       <form @submit.prevent="submit">
         <header class="modal-card-head">
           <p class="modal-card-title">ご褒美登録</p>
-          <button class="delete" aria-label="close"></button>
+          <button type="button" @click="close" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
           <div class="field">

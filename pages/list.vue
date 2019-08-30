@@ -1,21 +1,19 @@
 <template>
   <div style="padding: 0px;margin-top: 0px;">
     <div class="g-nav">
-      <!--
-      <div><img src="/l.png" /></div>
-      -->
+      <div><img src="/l.png" style="height: 30px;" /></div>
       <div class="prev">
         <nuxt-link :to="{ path: '/' }">戻る</nuxt-link>
       </div>
       <div>ごほうびアプリ</div>
     </div>
     <div style="padding: 15px;">
-      <ul class="columns is-multiline is-mobile">
-        <li class="column item is-2" v-for="(item, i) in 60" :key="item" :class="{ active: point > i }">
-          <div></div>
+      <ul class="items" style="padding-bottom: 140px;">
+        <li v-for="(item, i) in 60" :key="item" :class="{ active: point > i }">
+          <img src="/seal.png" class="seal" />
           <span v-if="i == 60 - 1">★★★</span>
           <span v-else-if="i % 10 == 0 && i > 0">★</span>
-          <span v-else>{{ i }}</span>
+          <span v-else>{{ i + 1 }}</span>
         </li>
       </ul>
     </div>
@@ -23,7 +21,7 @@
       <div><img src="/button.png" @click="workModal.isActive = true" /></div>
     </div>
     <WorkModal v-if="workModal.isActive" @addPoint="addPoint" @closeWork="closeWork" />
-    <RewardModal v-if="rewardModal.isActive" />
+    <RewardModal v-if="rewardModal.isActive" @finishAndClose="finishAndClose" />
   </div>
 </template>
 <script>
@@ -31,18 +29,6 @@ import WorkModal from "~/components/WorkModal"
 import RewardModal from "~/components/RewardModal"
 export default {
   components: { WorkModal, RewardModal },
-  watch: {
-    point(newValue, oldValue) {
-      const diff = newValue - oldValue
-      for (let i = 0; i < diff; i++) {
-        const n = parseInt(i) + parseInt(oldValue) + 1
-        if (n % 10 === 0 && n > 0) {
-          this.rewardModal.isActive = true
-          return
-        }
-      }
-    },
-  },
   data() {
     // localStorage.setItem("point", 0)
     const point = localStorage.getItem("point") || 0
@@ -56,6 +42,18 @@ export default {
       },
     }
   },
+  watch: {
+    point(newValue, oldValue) {
+      const diff = newValue - oldValue
+      for (let i = 0; i < diff; i++) {
+        const n = parseInt(i) + parseInt(oldValue) + 1
+        if (n % 10 === 0 && n > 0) {
+          this.rewardModal.isActive = true
+          return
+        }
+      }
+    },
+  },
   methods: {
     addPoint(point) {
       this.workModal.isActive = false
@@ -68,6 +66,9 @@ export default {
     },
     closeWork() {
       this.workModal.isActive = false
+    },
+    finishAndClose() {
+      this.rewardModal.isActive = false
     },
   },
 }
@@ -101,24 +102,27 @@ export default {
     }
   }
 }
-.item {
-  padding: 5px 10px;
-  span {
-    display: block;
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -10px;
+  margin-right: -10px;
+  li {
+    width: 20%;
+    padding: 0 10px;
     text-align: center;
-    font-size: 12px;
-  }
-  div {
-    width: 40px;
-    height: 40px;
-    background: #ddd;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 80px;
-  }
-  &.active {
-    div {
-      background-color: red;
+    margin-bottom: 10px;
+    img {
+      opacity: 0.1;
+    }
+    span {
+      display: block;
+      margin-top: -5px;
+    }
+    &.active {
+      img {
+        opacity: 1;
+      }
     }
   }
 }

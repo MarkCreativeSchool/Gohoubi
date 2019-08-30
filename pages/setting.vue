@@ -25,9 +25,16 @@
     <section>
       <h3>ご褒美</h3>
       <button @click="rewardCreateModal.isActive = !rewardCreateModal.isActive" class="button">ご褒美登録</button>
-      <div class="nothing" style="margin-top: 10px;">ご褒美が登録されていません。下のご褒美を追加するボタンからご褒美を追加してください。</div>
-      <ul style="margin-top: 10px;">
-        <li><a class="list-item">aaa</a></li>
+      <div class="nothing" style="margin-top: 10px;" v-if="rewards.length === 0">ご褒美が登録されていません。下のご褒美を追加するボタンからご褒美を追加してください。</div>
+      <ul class="list" v-else>
+        <li v-for="(reward, i) in rewards" :key="`reward-${i}`">
+          <a class="list-item" @click="openRewardUpdateModal(i)">
+            <div class="left">
+              {{ reward.name }}
+            </div>
+            <div class="right">x</div>
+          </a>
+        </li>
       </ul>
     </section>
     <section>
@@ -39,22 +46,32 @@
     </section>
     <WorkSettingModal v-show="workSettingModal.isActive" @closeWorkSettingModal="closeWorkSettingModal" @addWork="addWork"></WorkSettingModal>
     <WorkUpdateModal v-show="workUpdateModal.isActive" :work="workUpdateModal.work" @deleteWork="deleteWork" @updateWork="updateWork" @closeWorkUpdateModal="closeWorkUpdateModal"></WorkUpdateModal>
-    <RewardCreateModal v-show="rewardCreateModal.isActive" />
+    <RewardCreateModal v-show="rewardCreateModal.isActive" @closeReward="rewardCreateModal.isActive = false" @addReward="addReward" />
+    <RewardUpdateModal
+      v-show="rewardUpdateModal.isActive"
+      :reward="rewardUpdateModal.reward"
+      @closeRewardUpdateModal="rewardUpdateModal.isActive = false"
+      @deleteReward="deleteReward"
+      @updateReward="updateReward"
+    />
   </div>
 </template>
 <script>
 import WorkSettingModal from "~/components/WorkSettingModal"
 import WorkUpdateModal from "~/components/WorkUpdateModal"
 import RewardCreateModal from "~/components/RewardCreateModal"
+import RewardUpdateModal from "~/components/RewardUpdateModal"
 export default {
-  components: { WorkSettingModal, WorkUpdateModal, RewardCreateModal },
+  components: { WorkSettingModal, WorkUpdateModal, RewardCreateModal, RewardUpdateModal },
   data() {
     let works = JSON.parse(localStorage.getItem("works"))
     if (works === null) {
       works = []
     }
+    const rewards = JSON.parse(localStorage.getItem("rewards")) || []
     return {
       works: works,
+      rewards: rewards,
       workSettingModal: {
         isActive: false,
       },
@@ -63,6 +80,10 @@ export default {
         isActive: false,
       },
       rewardCreateModal: {
+        isActive: false,
+      },
+      rewardUpdateModal: {
+        reward: {},
         isActive: false,
       },
       selectedIndex: 0,
@@ -94,6 +115,26 @@ export default {
       this.works.splice(this.selectedIndex, 1)
       this.workUpdateModal.isActive = false
       localStorage.setItem("works", JSON.stringify(this.works))
+    },
+    addReward() {
+      alert("aaaa")
+      this.rewardCreateModal.isActive = false
+    },
+    openRewardUpdateModal(index) {
+      this.selectedIndex = index
+      const reward = this.rewards[index]
+      this.rewardUpdateModal.reward = reward
+      this.rewardUpdateModal.isActive = true
+    },
+    deleteReward() {
+      this.rewards.splice(this.selectedIndex, 1)
+      this.rewardUpdateModal.isActive = false
+      localStorage.setItem("rewards", JSON.stringify(this.rewards))
+    },
+    updateReward(reward) {
+      this.rewards[this.selectedIndex] = reward
+      this.rewardUpdateModal.isActive = false
+      localStorage.setItem("rewards", JSON.stringify(this.rewards))
     },
   },
 }
