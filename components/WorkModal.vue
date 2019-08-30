@@ -54,6 +54,7 @@ export default {
       padding: 0;
       ul {
         li {
+          cursor: pointer;
           padding: 15px 20px;
           border-bottom: solid 1px #ddd;
         }
