@@ -1,7 +1,7 @@
 <template>
   <section class="wrap">
     <h1>ごほうび<br />アプリ</h1>
-    <img src="/gohoubi/to.png" class="im" />
+    <img src="/Gohoubi/to.png" class="im" />
     <div class="buttons">
       <nuxt-link :to="{ path: '/list' }" class="button is-fullwidth is-primary">スタート</nuxt-link>
       <nuxt-link :to="{ path: '/setting' }" class="button is-fullwidth setting">設定</nuxt-link>
