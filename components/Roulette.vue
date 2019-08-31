@@ -48,17 +48,17 @@ export default {
 
     var radius = 130
     var data = [{
-      name: "label1",
+      name: "お菓子",
       color: '#FFCEBE',
       weight: 1
     },
       {
-        name: "label2",
+        name: "ガチャガチャ",
         color: '#CEFFBE',
         weight: 1
       },
       {
-        name: "label3",
+        name: "金と権力",
         color: '#CEBEFF',
         weight: 1
       },
