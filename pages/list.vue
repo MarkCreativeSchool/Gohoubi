@@ -11,8 +11,8 @@
       <ul class="items" style="padding-bottom: 140px;">
         <li v-for="(item, i) in 60" :key="item" :class="{ active: point > i }">
           <img src="/Gohoubi/seal.png" class="seal" />
-          <span v-if="i == 60 - 1">★★★</span>
-          <span v-else-if="i % 10 == 0 && i > 0">★</span>
+          <span v-if="i == 60 - 1" style="color: #f90;">★★★</span>
+          <span v-else-if="i % 10 == 0 && i > 0" style="color: #f90;">★</span>
           <span v-else>{{ i + 1 }}</span>
         </li>
       </ul>

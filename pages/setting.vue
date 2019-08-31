@@ -37,6 +37,7 @@
         </li>
       </ul>
     </section>
+    <!--
     <section>
       <h3>スペシャルご褒美</h3>
       <button @click="workSettingModal.isActive = !workSettingModal.isActive" class="button">スペシャルご褒美登録</button>
@@ -44,6 +45,7 @@
         <li><a class="list-item">aaa</a></li>
       </ul>
     </section>
+    -->
     <WorkSettingModal v-show="workSettingModal.isActive" @closeWorkSettingModal="closeWorkSettingModal" @addWork="addWork"></WorkSettingModal>
     <WorkUpdateModal v-show="workUpdateModal.isActive" :work="workUpdateModal.work" @deleteWork="deleteWork" @updateWork="updateWork" @closeWorkUpdateModal="closeWorkUpdateModal"></WorkUpdateModal>
     <RewardCreateModal v-show="rewardCreateModal.isActive" @closeReward="rewardCreateModal.isActive = false" @addReward="addReward" />
