@@ -62,16 +62,6 @@ export default {
         color: '#CEBEFF',
         weight: 1
       },
-      {
-        name: "label4",
-        color: '#FDED9E',
-        weight: 1
-      },
-      {
-        name: "label5",
-        color: '#000000',
-        weight: 1
-      },
     ]
 
     var sum_weight = 0

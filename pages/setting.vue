@@ -118,8 +118,8 @@ export default {
       this.workUpdateModal.isActive = false
       localStorage.setItem("works", JSON.stringify(this.works))
     },
-    addReward() {
-      alert("aaaa")
+    addReward(reward) {
+      this.rewards.push(reward)
       this.rewardCreateModal.isActive = false
     },
     openRewardUpdateModal(index) {
